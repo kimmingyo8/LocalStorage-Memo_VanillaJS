@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/reset.css" />
+    <title>MeMo</title>
+  </head>
+  <body>
+    <div id="root">
+      <header>
+        <section id="header-y-m">
+          <h1>년도</h1>
+          <p class="memo-month">달</p>
+        </section>
+      </header>
+      <main>
+        <section id="main-container">
+          <img
+            class="btn-day down"
+            src="./img/icon-up-arrow.svg"
+            alt="이전 날짜 버튼"
+          />
+          <ul class="day-card-list">
+            <li class="day-card">
+              <div class="day-context">
+                <p class="day"></p>
+              </div>
+              <div class="data-in"></div>
+
+              <!-- card -->
+            </li>
+            <li class="day-card">
+              <div class="day-context">
+                <p class="day"></p>
+              </div>
+              <div class="data-in"></div>
+              <!-- card -->
+            </li>
+            <li class="day-card">
+              <div class="day-context">
+                <p class="day"></p>
+              </div>
+              <div class="data-in"></div>
+              <!-- card -->
+            </li>
+            <li class="day-card">
+              <div class="day-context">
+                <p class="day"></p>
+              </div>
+              <div class="data-in"></div>
+              <!-- card -->
+            </li>
+          </ul>
+          <img
+            class="btn-day up"
+            src="./img/icon-down-arrow.svg"
+            alt="이후 날짜 버튼"
+          />
+        </section>
+        <section id="main-container"></section>
+        <img
+          class="btn btn-expand"
+          src="./img/icon-up-arrow.svg"
+          alt="달력 더보기"
+        />
+      </main>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vh;
+        gap: 10vw;
+        height: 100vh;
+        width: 100%;
+        padding: 2rem;
+        font-family: "Spoqa Han Sans Neo", "sans-serif";
+      }
+
+      .content-container {
+      }
+
+      input {
+        display: block;
+        width: 200px;
+        height: 30px;
+        margin-bottom: 10px;
+        padding: 4px;
+        border-radius: 10px;
+      }
+
+      textarea {
+        border-radius: 10px;
+        display: block;
+        width: 300px;
+        height: 350px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        display: block;
+        width: 306px;
+        border-radius: 30px;
+        height: 30px;
+        background-color: inherit;
+      }
+      button:hover {
+        background-color: black;
+        color: white;
+      }
+      #display {
+        border: 1px solid black;
+        border-radius: 30px;
+        padding: 20px;
+        margin: 30px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      h2 {
+        border-top: 1px solid #dbdbdb;
+        border-bottom: 1px solid #dbdbdb;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="content-container">
+        <label for="tit">제목</label>
+        <input type="text" name="tit" id="title" placeholder="할 일?" />
+        <textarea name="" id="content" cols="30" rows="10"></textarea>
+        <button type="button" onclick="saveNote()">메모</button>
+      </section>
+      <section id="display"></section>
+    </main>
+    <script>
+      let allMemo = JSON.parse(localStorage.getItem("allMemo"));
+      allMemo = allMemo ?? [];
+      render();
+
+      function saveNote() {
+        const title = document.getElementById("title").value;
+        const content = document.getElementById("content").value;
+
+        allMemo.push({ title, content, len: allMemo.length });
+
+        localStorage.setItem("allMemo", JSON.stringify(allMemo));
+        render();
+      }
+
+      function render() {
+        const display = document.getElementById("display");
+        display.innerHTML = "";
+
+        for (const item of allMemo) {
+          const saveTitle = document.createElement("h2");
+          const saveContent = document.createElement("p");
+          const saveId = document.createElement("p");
+          const deleteMemoBtn = document.createElement("button");
+
+          saveTitle.textContent = item.title;
+          saveContent.textContent = item.content;
+          saveId.textContent = item.len + 1;
+          deleteMemoBtn.textContent = "삭제";
+          deleteMemoBtn.setAttribute("id", item.len);
+          deleteMemoBtn.setAttribute("onclick", "remove()");
+
+          display.appendChild(saveId);
+          display.appendChild(saveTitle);
+          display.appendChild(saveContent);
+          display.appendChild(deleteMemoBtn);
+        }
+      }
+
+      function remove() {
+        const idx = allMemo.find((item) => item.len == event.srcElement.id);
+        if (idx) {
+          allMemo.splice(
+            allMemo.findIndex((item) => item.len == idx.len),
+            1
+          );
+        }
+        localStorage.setItem("allMemo", JSON.stringify(allMemo));
+        render();
+      }
+    </script>
+  </body>
+</html>
